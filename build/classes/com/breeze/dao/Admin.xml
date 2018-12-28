@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.breeze.dao.AdminMapper">
+	<insert id="add" parameterType="Admin">
+		insert into tb_admin ( name, pwd, gender, phone, email ) values (#{name}, #{pwd},
+		#{gender}, #{phone}, #{email})
+	</insert>
+
+	<delete id="delete" parameterType="Admin">
+		delete from tb_admin where id= #{id}
+	</delete>
+
+	<select id="get" parameterType="_int" resultType="Admin">
+		select * from tb_admin where id= #{id}
+	</select>
+
+	<select id="search" parameterType="String" resultType="Admin">
+		select*from tb_admin where name like concat('%',#{key},'%') or phone
+		like concat('%',#{key},'%') or email like concat('%',#{key},'%')
+	</select>
+
+	<update id="update" parameterType="Admin">
+		update tb_admin set
+		name=#{name}, pwd=#{pwd},gender=#{gender},phone=#{phone},email=#{email}
+		where id=#{id}
+	</update>
+
+	<select id="list" resultType="Admin">
+		select * from tb_admin
+	</select>
+
+	<select id="login_check" parameterType="Admin" resultType="Admin">
+		select name, pwd from tb_admin where name = #{name} and pwd=#{pwd}
+	</select>
+
+</mapper>
+
